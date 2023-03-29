@@ -1,5 +1,7 @@
-# exe files
+# exe and example files
 *.exe
+*.htm
+*.html
 
 #Mac files
 .DS_Store
