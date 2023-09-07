@@ -20,7 +20,7 @@ def select_file():
 <!--
  /* Style Definitions */
 p.GIN
-	{margin-top:0cm;
+    {margin-top:0cm;
 	margin-right:0cm;
 	margin-bottom:0cm;
 	margin-left:36.0pt;
@@ -46,8 +46,11 @@ p.GIN
             txt = re.sub(r'<\/?span[^>]*>', '', txt)
             txt = re.sub(r'<\/?/span[^>]*>', '', txt)
             txt = re.sub(r'<\/?div[^>]*>', '', txt)
-            txt = re.sub('<style>.*?</style>', rightstyle, txt, flags = re.DOTALL)
+            txt = re.sub(r'<style>.*?</style>', rightstyle, txt, flags = re.DOTALL)
             txt = re.sub(u"\u2013", "-", txt)
+            txt = re.sub(r'<script(.|\n)*script>', '', txt)
+            txt = re.sub(r'<a name[\S\s]*?>([\S\s]*?)<\/a>', r'\1', txt)
+            txt = re.sub('<body lang=RU link=.*?>', '', txt)
             txt = re.sub('<title>.*?</title>', '<title>Информационная система: История геологии и горного дела ГИН РАН</title>', txt, flags = re.DOTALL)
             while '<body lang=RU link=blue vlink=#954F72 style=word-wrap:break-word>' in txt:
                 txt = txt.replace('<body lang=RU link=blue vlink=#954F72 style=word-wrap:break-word>', '<body lang=RU>')
@@ -57,6 +60,8 @@ p.GIN
                 txt = txt.replace('MsoNormalCxSpMiddle', 'GIN')
             while 'MsoNormalCxSpLast' in txt:
                 txt = txt.replace('MsoNormalCxSpLast', 'GIN')
+            while 'MsoNormalCxSpLast' in txt:
+                txt = txt.replace('MsoNormal', 'GIN')
             while '&nbsp;' in txt:
                 txt = txt.replace('&nbsp;', ' ')
             while '</i><i>' in txt:
